@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>TECHKNOX : LOGIN PAGE</title>
+        <link rel="stylesheet" href="log style.css">
+    </head>
+    <body>
+
+      
+
+        <video src="web1.mp4" muted loop autoplay></video>
+    
+        
+     
+        <div class="login">
+            <h2>Login</h2>
+
+
+            <div class="inputBox">
+                <input type="text" required placeholder="USERNAME">
+                
+            </div>
+
+
+            <div class="inputBox">
+                <input type="password" required placeholder="PASSWORD">
+               
+            </div>
+
+
+            <div class="inputBox">
+                <input type="submit" value="Sign in">
+            </div>
+
+
+            <div class="group">
+                <a href="#">Forgot Password</a>
+                <a href="#">Sign up</a>
+            </div>
+        </div>
+       
+     
+        <script>
+            let boxes = document.querySelectorAll('.box');
+            boxes.forEach(box => {
+                box.onmousemove = function(e){
+                    let x = e.pageX - box.offsetLeft; 
+                    let y = e.pageY - box.offsetTop; 
+
+                    box.style.setProperty('--x', x + 'px');
+                    box.style.setProperty('--y', y + 'px');
+                }
+            })
+        </script>
+
+
+    </body>
+</html>
