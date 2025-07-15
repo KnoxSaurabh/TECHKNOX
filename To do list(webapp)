@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart To-Do App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .input-section {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    .task-section {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #555;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #fff;
+      padding: 12px;
+      margin: 8px 0;
+      border-left: 5px solid #007bff;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-text {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .btn-group button {
+      margin-left: 5px;
+      background-color: #28a745;
+    }
+
+    .btn-group .edit {
+      background-color: #ffc107;
+    }
+
+    .btn-group .delete {
+      background-color: #dc3545;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Daily To-Do List</h1>
+
+  <div class="input-section">
+    <input type="text" id="taskInput" placeholder="Enter a new task...">
+    <button onclick="addTask()">Add Task</button>
+  </div>
+
+  <div class="task-section">
+    <h2>📌 Pending Tasks</h2>
+    <ul id="pendingTasks"></ul>
+  </div>
+
+  <div class="task-section">
+    <h2>✅ Completed Tasks</h2>
+    <ul id="completedTasks"></ul>
+  </div>
+
+  <script>
+    const pendingTasks = document.getElementById('pendingTasks');
+    const completedTasks = document.getElementById('completedTasks');
+
+    function getCurrentDateTime() {
+      const now = new Date();
+      return now.toLocaleString();
+    }
+
+    function createTaskElement(text, timestamp, completed = false) {
+      const li = document.createElement('li');
+
+      const span = document.createElement('span');
+      span.className = 'task-text';
+      span.innerHTML = `<strong>${text}</strong><br><span class="timestamp">${timestamp}</span>`;
+
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'btn-group';
+
+      const completeBtn = document.createElement('button');
+      completeBtn.innerText = completed ? "Undo" : "Complete";
+      completeBtn.onclick = () => toggleComplete(li, text);
+
+      const editBtn = document.createElement('button');
+      editBtn.innerText = "Edit";
+      editBtn.className = "edit";
+      editBtn.onclick = () => editTask(li, text);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = "delete";
+      deleteBtn.onclick = () => li.remove();
+
+      btnGroup.append(completeBtn, editBtn, deleteBtn);
+      li.append(span, btnGroup);
+
+      if (completed) {
+        li.classList.add('completed');
+        li.style.borderLeftColor = "#28a745";
+      }
+
+      return li;
+    }
+
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const task = taskInput.value.trim();
+      if (!task) return;
+
+      const timestamp = `Added: ${getCurrentDateTime()}`;
+      const li = createTaskElement(task, timestamp);
+
+      pendingTasks.appendChild(li);
+      taskInput.value = '';
+    }
+
+    function toggleComplete(li, text) {
+      const isCompleted = li.classList.contains('completed');
+      const newTimestamp = isCompleted
+        ? `Added: ${getCurrentDateTime()}`
+        : `Completed: ${getCurrentDateTime()}`;
+
+      const newLi = createTaskElement(text, newTimestamp, !isCompleted);
+      li.remove();
+
+      if (isCompleted) {
+        pendingTasks.appendChild(newLi);
+      } else {
+        completedTasks.appendChild(newLi);
+      }
+    }
+
+    function editTask(li, oldText) {
+      const newText = prompt("Edit your task:", oldText);
+      if (newText && newText.trim()) {
+        const timestamp = `Updated: ${getCurrentDateTime()}`;
+        const isCompleted = li.classList.contains('completed');
+        const newLi = createTaskElement(newText.trim(), timestamp, isCompleted);
+        li.replaceWith(newLi);
+      }
+    }
+  </script>
+
+</body>
+</html>
