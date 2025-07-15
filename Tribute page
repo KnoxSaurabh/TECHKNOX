@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tribute to Swami Vivekananda</title>
+  <style>
+    /* Reset & fonts */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    /* Hero section */
+    .hero {
+      height: 100vh;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Swami_Vivekananda_1893_Scanned_Image.jpg/800px-Swami_Vivekananda_1893_Scanned_Image.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero .overlay {
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      font-style: italic;
+    }
+
+    /* Biography */
+    .biography {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: white;
+      border-left: 5px solid #ff6f00;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .biography h2 {
+      color: #ff6f00;
+      margin-bottom: 1rem;
+    }
+    .biography p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    /* Achievements */
+    .achievements {
+      background: #fff3e0;
+      padding: 3rem 1rem;
+    }
+    .achievements h2 {
+      text-align: center;
+      color: #e65100;
+      margin-bottom: 2rem;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ffcc80;
+      padding: 1.5rem;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      color: #ff6f00;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ff6f00;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .biography {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="overlay">
+      <h1>Swami Vivekananda</h1>
+      <p>"Arise, awake and stop not till the goal is reached."</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="biography">
+      <h2>Biography</h2>
+      <p>
+        Swami Vivekananda (1863–1902) was an Indian Hindu monk and a key figure in the introduction of Indian philosophies of Vedanta and Yoga to the Western world. Born as Narendranath Datta in Kolkata, he was a disciple of Ramakrishna Paramahamsa. He represented India at the 1893 Parliament of the World's Religions in Chicago, where his speech began with the iconic "Sisters and Brothers of America..." which earned him worldwide recognition.
+      </p>
+      <p>
+        He played a major role in the revival of Hinduism in India and contributed to the concept of nationalism in colonial India. He founded the Ramakrishna Mission and Math, organizations that remain vital to spiritual and social work across the globe.
+      </p>
+    </section>
+
+    <section class="achievements">
+      <h2>Major Achievements</h2>
+      <div class="card-container">
+        <div class="card">
+          <h3>1893 Chicago Speech</h3>
+          <p>Electrified the Parliament of World Religions and introduced Indian spirituality to the West.</p>
+        </div>
+        <div class="card">
+          <h3>Ramakrishna Mission</h3>
+          <p>Founded in 1897 to promote education, social welfare, and spiritual growth.</p>
+        </div>
+        <div class="card">
+          <h3>Vedanta in the West</h3>
+          <p>Popularized the teachings of Vedanta and Yoga in the USA and Europe.</p>
+        </div>
+        <div class="card">
+          <h3>Nationalist Icon</h3>
+          <p>Inspired freedom fighters like Netaji Subhas Chandra Bose and Aurobindo Ghosh.</p>
+        </div>
+      </div>
+    </section>
+
+    <button onclick="scrollToTop()" class="scroll-top" id="scrollBtn">↑</button>
+  </main>
+
+  <footer>
+    <p>Designed as a tribute to Swami Vivekananda | © 2025</p>
+  </footer>
+
+  <script>
+    // Show scroll-to-top button
+    window.onscroll = function () {
+      const btn = document.getElementById('scrollBtn');
+      if (document.documentElement.scrollTop > 100) {
+        btn.style.display = 'block';
+      } else {
+        btn.style.display = 'none';
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
